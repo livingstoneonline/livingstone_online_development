@@ -30,6 +30,14 @@ function livingstone_devel_menu() {
  */
 function livingstone_devel_admin_form(array $form, array &$form_state) {
   return array(
+    'branch' => array(
+      '#type' => 'select',
+      '#options' => array(
+        'dev' => 'dev',
+        'stage' => 'stage',
+        'prod' => 'prod',
+      ),
+    ),
     'submit' => array(
       '#type' => 'submit',
       '#value' => t('Update Modules'),
@@ -46,12 +54,13 @@ function livingstone_devel_admin_form(array $form, array &$form_state) {
  *   Drupal form state.
  */
 function livingstone_devel_admin_form_submit(array $form, array &$form_state) {
-  $output_features = shell_exec('cd /var/www/html/sites/all/modules/features; git pull 2>&1');
+  $branch = $form_state['values']['branch'];
+  $output_features = shell_exec("cd /var/www/html/sites/all/modules/features; git checkout ${branch}; git pull 2>&1");
   dsm($output_features, "Update Features");
-  $output_theme = shell_exec('cd /var/www/html/sites/all/themes/lo; git pull 2>&1');
+  $output_theme = shell_exec("cd /var/www/html/sites/all/themes/lo; git checkout ${branch}; git pull 2>&1");
   dsm($output_theme, "Update Theme");
-  $output_module = shell_exec('cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git pull 2>&1');
+  $output_module = shell_exec("cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git checkout ${branch}; git pull 2>&1");
   dsm($output_module, "Update Module");
-  $output_cache = shell_exec('cd /var/www/html; /usr/local/bin/drush cc all 2>&1');
+  $output_cache = shell_exec("cd /var/www/html; /usr/local/bin/drush cc all 2>&1");
   dsm($output_cache, "Clear Cache");
 }
