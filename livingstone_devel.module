@@ -46,12 +46,12 @@ function livingstone_devel_admin_form(array $form, array &$form_state) {
  *   Drupal form state.
  */
 function livingstone_devel_admin_form_submit(array $form, array &$form_state) {
-  $output_features = shell_exec('cd /var/www/html/sites/all/modules/features; git pull');
+  $output_features = shell_exec('cd /var/www/html/sites/all/modules/features; git pull 2>&1');
   dsm($output_features, "Update Features");
-  $output_theme = shell_exec('cd /var/www/html/sites/all/themes/lo; git pull');
+  $output_theme = shell_exec('cd /var/www/html/sites/all/themes/lo; git pull 2>&1');
   dsm($output_theme, "Update Theme");
-  $output_module = shell_exec('cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git pull');
+  $output_module = shell_exec('cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git pull 2>&1');
   dsm($output_module, "Update Module");
-  $output_cache = shell_exec('cd /var/www/html; drush cc all');
+  $output_cache = shell_exec('cd /var/www/html; drush cc all 2>&1');
   dsm($output_cache, "Clear Cache");
 }
