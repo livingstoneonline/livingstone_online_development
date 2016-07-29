@@ -52,6 +52,6 @@ function livingstone_devel_admin_form_submit(array $form, array &$form_state) {
   dsm($output_theme, "Update Theme");
   $output_module = shell_exec('cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git pull 2>&1');
   dsm($output_module, "Update Module");
-  $output_cache = shell_exec('cd /var/www/html; drush cc all 2>&1');
+  $output_cache = shell_exec('cd /var/www/html; /usr/local/bin/drush cc all 2>&1');
   dsm($output_cache, "Clear Cache");
 }
