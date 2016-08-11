@@ -9,7 +9,7 @@ function livingstone_devel_menu() {
   return array(
     'admin/config/development/livingstone' => array(
       'title' => 'Livingstone development settings',
-      'access arguments' => array('administer content'),
+      'access arguments' => array('access devel information'),
       'type' => MENU_NORMAL_ITEM,
       'page callback' => 'drupal_get_form',
       'page arguments' => array('livingstone_devel_admin_form'),
@@ -59,8 +59,8 @@ function livingstone_devel_admin_form_submit(array $form, array &$form_state) {
   dsm($output_features, "Update Features");
   $output_theme = shell_exec("cd /var/www/html/sites/all/themes/lo; git checkout ${branch}; git pull 2>&1");
   dsm($output_theme, "Update Theme");
-  $output_module = shell_exec("cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git checkout ${branch}; git pull 2>&1");
-  dsm($output_module, "Update Module");
+  //$output_module = shell_exec("cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git checkout ${branch}; git pull 2>&1");
+  //dsm($output_module, "Update Module");
   $output_cache = shell_exec("cd /var/www/html; /usr/local/bin/drush cc all 2>&1");
   dsm($output_cache, "Clear Cache");
 }
