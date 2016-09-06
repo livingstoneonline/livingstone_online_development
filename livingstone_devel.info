@@ -1,5 +1,4 @@
 name = "Livingstone Development"
 description = "Tools for Livingstone Development."
 version = 7.x-dev
-dependencies[] = devel
 core = 7.x
