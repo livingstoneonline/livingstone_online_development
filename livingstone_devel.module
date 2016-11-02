@@ -62,6 +62,8 @@ function livingstone_devel_admin_form_submit(array $form, array &$form_state) {
   drupal_set_message($output_features, "Update Features");
   $output_theme = shell_exec("cd /var/www/html/sites/all/themes/lo; git checkout ${branch}; git pull 2>&1");
   drupal_set_message($output_theme, "Update Theme");
+  $output_module = shell_exec("cd /var/www/html/sites/all/modules/custom/leap_xslt; git checkout ${branch}; git pull 2>&1");
+  drupal_set_message($output_module, "Update LEAP-XSLT");
   $output_module = shell_exec("cd /var/www/html/sites/all/modules/custom/livingstone_online_module; git checkout ${branch}; git pull 2>&1");
   drupal_set_message($output_module, "Update Module");
   $output_cache = shell_exec("cd /var/www/html; /usr/local/bin/drush cc all 2>&1");
